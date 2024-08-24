@@ -1,3 +1,4 @@
+//src/utils/copyToClipboatrd.js
 export const copyToClipboard = (text) => {
   // Create a temporary textarea element to hold the text
   const textarea = document.createElement("textarea");
