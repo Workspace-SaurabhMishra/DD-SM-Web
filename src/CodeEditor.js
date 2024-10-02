@@ -41,7 +41,7 @@ const CodeEditor = () => {
     }
 
     axios
-      .get("http://localhost:8977/platforms", {
+      .get("http://192.168.1.200:8977/platforms", {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -101,10 +101,19 @@ const CodeEditor = () => {
 
   const handleSave = () => {
     const accessToken = localStorage.getItem("access_token");
+
+    // URL-safe Base64 encoding function
+    const toBase64Url = (input) => {
+      return btoa(input)
+        .replace(/\+/g, "-") // Replace + with -
+        .replace(/\//g, "_") // Replace / with _
+        .replace(/=+$/, ""); // Remove any trailing =
+    };
+
     axios
       .post(
-        "http://localhost:8977/scripts/create",
-        { platformId, url: btoa(regex), content },
+        "http://192.168.1.200:8977/scripts/create",
+        { platformId, url: toBase64Url(regex), content }, // Use URL-safe Base64 encoded regex
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -119,9 +128,18 @@ const CodeEditor = () => {
 
   const handleRead = () => {
     const accessToken = localStorage.getItem("access_token");
+
+    // URL-safe Base64 encoding function
+    const toBase64Url = (input) => {
+      return btoa(input)
+        .replace(/\+/g, "-") // Replace + with -
+        .replace(/\//g, "_") // Replace / with _
+        .replace(/=+$/, ""); // Remove any trailing =
+    };
+
     axios
-      .get("http://localhost:8977/scripts/read", {
-        params: { platformId, url: btoa(regex) },
+      .get("http://192.168.1.200:8977/scripts/read", {
+        params: { platformId, url: toBase64Url(regex) },
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -134,10 +152,18 @@ const CodeEditor = () => {
 
   const handleUpdate = () => {
     const accessToken = localStorage.getItem("access_token");
+
+    // URL-safe Base64 encoding function
+    const toBase64Url = (input) => {
+      return btoa(input)
+        .replace(/\+/g, "-") // Replace + with -
+        .replace(/\//g, "_") // Replace / with _
+        .replace(/=+$/, ""); // Remove any trailing =
+    };
     axios
       .post(
-        "http://localhost:8977/scripts/update",
-        { platformId, url: btoa(regex), content },
+        "http://192.168.1.200:8977/scripts/update",
+        { platformId, url: toBase64Url(regex), content },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -152,9 +178,17 @@ const CodeEditor = () => {
 
   const handleDelete = () => {
     const accessToken = localStorage.getItem("access_token");
+    // URL-safe Base64 encoding function
+    const toBase64Url = (input) => {
+      return btoa(input)
+        .replace(/\+/g, "-") // Replace + with -
+        .replace(/\//g, "_") // Replace / with _
+        .replace(/=+$/, ""); // Remove any trailing =
+    };
+
     axios
-      .get("http://localhost:8977/scripts/delete", {
-        params: { platformId, url: btoa(regex) },
+      .get("http://192.168.1.200:8977/scripts/delete", {
+        params: { platformId, url: toBase64Url(regex) },
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

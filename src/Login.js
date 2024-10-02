@@ -33,10 +33,13 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:8978/admin/login", {
-        adminId,
-        password,
-      });
+      const response = await axios.post(
+        "http://192.168.1.200:8978/admin/login",
+        {
+          adminId,
+          password,
+        }
+      );
 
       if (response.status === 200) {
         const { access_token } = response.data.data;
